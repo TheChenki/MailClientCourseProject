@@ -1,7 +1,9 @@
-﻿using MailClient.MVVM;
+﻿using System;
+using MailClient.MVVM;
 using MailLib;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MailClient.ViewModels
@@ -121,8 +123,16 @@ namespace MailClient.ViewModels
 
             using (new BusyIndicator())
             {
-                _mailbox = Mailbox.GetInstance();
-                Folders = _mailbox.GetFolders();
+                try
+                {
+                    _mailbox = Mailbox.GetInstance();
+                    Folders = _mailbox.GetFolders();
+                    MessageBox.Show("Test");
+                }
+                catch (Exception ex)
+                {
+                    //ignore
+                }
             }
 
         }
@@ -136,8 +146,15 @@ namespace MailClient.ViewModels
                 IsBrowserVisible = false;
                 using (new BusyIndicator())
                 {
-                    _mailbox.SelectFolder(SelectedFolder);
-                    Mails = _mailbox.GetMailHeaders();
+                    try
+                    {
+                        _mailbox.SelectFolder(SelectedFolder);
+                        Mails = _mailbox.GetMailHeaders();
+                    }
+                    catch (Exception ex)
+                    {
+                        //ignore
+                    }
                 }
                 IsBrowserVisible = !IsInputMailVisible && SelectedMailText != null;
             }
@@ -151,7 +168,15 @@ namespace MailClient.ViewModels
             using (new BusyIndicator())
             {
                 IsBrowserVisible = false;
-                SelectedMailText = _mailbox.GetMailBody(SelectedMail.Id);
+
+                try
+                {
+                    SelectedMailText = _mailbox.GetMailBody(SelectedMail.Id);
+                }
+                catch (Exception ex)
+                {
+                    //ignore
+                }
 
                 IsInputMailVisible = false;
                 IsBrowserVisible = !IsInputMailVisible;
@@ -167,8 +192,17 @@ namespace MailClient.ViewModels
             using (new BusyIndicator())
             {
                 IsBrowserVisible = false;
-                _mailbox.DeleteMail(SelectedMail.Id);
-                Mails = _mailbox.GetMailHeaders();
+
+                try
+                {
+                    _mailbox.DeleteMail(SelectedMail.Id);
+                    Mails = _mailbox.GetMailHeaders();
+                }
+                catch (Exception ex)
+                {
+                    //ignore
+                }
+
                 IsBrowserVisible = !IsInputMailVisible;
             }
 
@@ -179,13 +213,22 @@ namespace MailClient.ViewModels
             using (new BusyIndicator())
             {
                 IsBrowserVisible = false;
-                foreach (Mail mail in Mails)
+
+                try
                 {
-                    _mailbox.DeleteMail(mail.Id);
+                    foreach (Mail mail in Mails)
+                    {
+                        _mailbox.DeleteMail(mail.Id);
+                    }
+
+                    _mailbox.DeleteMail(SelectedMail.Id);
+                    Mails = _mailbox.GetMailHeaders();
+                }
+                catch (Exception ex)
+                {
+                    //ignore
                 }
 
-                _mailbox.DeleteMail(SelectedMail.Id);
-                Mails = _mailbox.GetMailHeaders();
                 IsBrowserVisible = !IsInputMailVisible;
             }
         }
@@ -195,7 +238,16 @@ namespace MailClient.ViewModels
             using (new BusyIndicator())
             {
                 IsBrowserVisible = false;
-                Mails = _mailbox.GetMailHeaders();
+
+                try
+                {
+                    Mails = _mailbox.GetMailHeaders();
+                }
+                catch (Exception ex)
+                {
+                    //ignore
+                }
+
                 IsBrowserVisible = !IsInputMailVisible;
             }
         }
@@ -210,10 +262,17 @@ namespace MailClient.ViewModels
         {
             using (new BusyIndicator())
             {
-                if(_mailbox.SendMail(MailTo, MailSubject, MailContent))
-                    SendMailError = "";
-                else
-                    SendMailError = "Не удалось отправить письмо!";
+                try
+                {
+                    if (_mailbox.SendMail(MailTo, MailSubject, MailContent))
+                        SendMailError = "";
+                    else
+                        SendMailError = "Не удалось отправить письмо!";
+                }
+                catch (Exception ex)
+                {
+                    //ignore
+                }
             }
 
         }
