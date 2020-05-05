@@ -127,11 +127,11 @@ namespace MailClient.ViewModels
                 {
                     _mailbox = Mailbox.GetInstance();
                     Folders = _mailbox.GetFolders();
-                    MessageBox.Show("Test");
+
                 }
                 catch (Exception ex)
                 {
-                    //ignore
+                    MessageBox.Show(ex.Message,"Произошла ошибка!",MessageBoxButton.OK,MessageBoxImage.Error);
                 }
             }
 
@@ -153,7 +153,7 @@ namespace MailClient.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        //ignore
+                        MessageBox.Show(ex.Message, "Произошла ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 IsBrowserVisible = !IsInputMailVisible && SelectedMailText != null;
@@ -175,7 +175,7 @@ namespace MailClient.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    //ignore
+                    MessageBox.Show(ex.Message, "Произошла ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
                 IsInputMailVisible = false;
@@ -200,7 +200,7 @@ namespace MailClient.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    //ignore
+                    MessageBox.Show(ex.Message, "Произошла ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
                 IsBrowserVisible = !IsInputMailVisible;
@@ -221,12 +221,11 @@ namespace MailClient.ViewModels
                         _mailbox.DeleteMail(mail.Id);
                     }
 
-                    _mailbox.DeleteMail(SelectedMail.Id);
                     Mails = _mailbox.GetMailHeaders();
                 }
                 catch (Exception ex)
                 {
-                    //ignore
+                    MessageBox.Show(ex.Message, "Произошла ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
                 IsBrowserVisible = !IsInputMailVisible;
@@ -245,7 +244,7 @@ namespace MailClient.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    //ignore
+                    MessageBox.Show(ex.Message, "Произошла ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
                 IsBrowserVisible = !IsInputMailVisible;
@@ -271,7 +270,7 @@ namespace MailClient.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    //ignore
+                    MessageBox.Show(ex.Message, "Произошла ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
 
