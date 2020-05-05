@@ -81,7 +81,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Image Source="pack://application:,,,/Resources/clouds.jpg" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Stretch="UniformToFill" Visibility="Visible"/>
-        <Border Padding="10" Grid.Column="1" Grid.Row="1" Background="White" CornerRadius="15">
+        <Border Padding="10" Grid.Column="1" Grid.Row="1" Background="White" CornerRadius="5">
 
             <Grid Background="White">
 

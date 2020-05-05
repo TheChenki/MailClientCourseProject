@@ -173,7 +173,7 @@
 
         <GridSplitter Width="3" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
 
-        <Image Source="pack://application:,,,/Resources/background.jpg" Grid.Column="3" Stretch="UniformToFill" Visibility="Visible"/>
+        <Image Source="pack://application:,,,/Resources/clouds.jpg" Grid.Column="3" Stretch="UniformToFill" Visibility="Visible"/>
         <WebBrowser helpers:BrowserHelper.Html="{Binding SelectedMailText}" Grid.Column="3" Visibility="{Binding IsBrowserVisible, Converter={StaticResource BoolToVis}}" />
         <Grid Grid.Column="3" Background="White" Visibility="{Binding IsInputMailVisible, Converter={StaticResource BoolToVis}}">
             <Grid.RowDefinitions>
